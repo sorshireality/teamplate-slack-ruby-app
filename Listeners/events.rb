@@ -11,9 +11,7 @@ class API < Sinatra::Base
       # When we receive a `url_verification` event, we need to
       # return the same `challenge` value sent to us from Slack
       # to confirm our server's authenticity.
-      request_data['challenge']
-    else
-      # type code here
+      return request_data['challenge']
     end
 
   end

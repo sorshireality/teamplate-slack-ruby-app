@@ -5,6 +5,7 @@ require './Listeners/events'
 require './Listeners/interactivity'
 require './env'
 require './Components/Database'
+require './Components/Helper'
 
 # Load Slack app info into a hash called `config` from the environment variables assigned during setup
 # See the "Running the app" section of the README for instructions.
