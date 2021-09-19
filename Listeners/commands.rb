@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'slack-ruby-client'
 
 class API < Sinatra::Base
+  require 'ferrum'
 
   attr_accessor :access_token
   attr_accessor :input
@@ -38,6 +39,60 @@ class API < Sinatra::Base
         trigger_id: triger_id,
         view: view
     )
-    return true
+
+    status 200
+  end
+
+  get '/render_graph' do
+    send_file 'Components/Graph/index.html'
+  end
+
+  get '/main.js' do
+    send_file 'Components/Graph/main.js'
+  end
+
+  get '/style.css' do
+    send_file 'Components/Graph/style.css'
+  end
+
+  get '/data.json' do
+    send_file 'Components/Graph/data.json'
+  end
+
+  get '/graph_image.png' do
+    send_file 'Components/Graph/result.png'
+  end
+
+  post '/graph' do
+    get_input
+
+    DATA_TO_JSON = {"2021": {"Jun": 8207, "Jul": 12455, "Aug": 10086}, "2022": {"Jul": 1234, "Oct": 5678, "Jan": 9123}}
+    File.open('./Components/Graph/data.json', 'w') do |file|
+      file.write DATA_TO_JSON.to_json
+    end
+
+    browser = Ferrum::Browser.new
+    browser.go_to("https://#{request.host}/render_graph")
+    browser.screenshot(path: "Components/Graph/result.png")
+
+    Database.init
+    access_token = Database.find_access_token input['team_id']
+    client = create_slack_client access_token
+
+    triger_id = input['trigger_id']
+
+    host = request.host
+    template = File.read './Components/View/graph.erb'
+    view = ERB.new(template).result(binding)
+
+    client.views_open(
+        trigger_id: triger_id,
+        view: view
+    )
+
+    File.delete "./Components/Graph/result.png"
+    File.delete "./Components/Graph/data.json"
+
+    status 200
   end
 end

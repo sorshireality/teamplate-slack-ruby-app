@@ -5,3 +5,7 @@
 ## 1.1 ##
 
 * My App version.
+
+## 1.2 ##
+
+* Added Graph Functionality.
