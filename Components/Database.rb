@@ -22,7 +22,6 @@ class Database
   end
 
   def save_access(team, team_id)
-    create_access_table
     remove_if_exist team, team_id
     remember_access team, team_id
   end
