@@ -59,8 +59,8 @@ class API < Sinatra::Base
     send_file 'Components/Graph/data.json'
   end
 
-  get '/graph_image.png' do
-    send_file 'Components/Graph/result.png'
+  get %r{/graph_image/(?<ts>\w+)} do
+    send_file "/app/#{params[:ts]}_graph.png"
   end
 
   post '/graph' do
@@ -75,7 +75,8 @@ class API < Sinatra::Base
         :browser_path => "/app/.apt/usr/bin/google-chrome"
     )
     browser.go_to("https://#{request.host}/render_graph")
-    browser.screenshot(path: "Components/Graph/result.png")
+    graph_ts = Time.now.to_i
+    browser.screenshot(path: "/app/#{graph_ts}_graph.png")
 
     db = Database.new
     access_token = db.find_access_token input['team_id']
