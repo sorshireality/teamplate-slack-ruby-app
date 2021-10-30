@@ -71,7 +71,9 @@ class API < Sinatra::Base
       file.write DATA_TO_JSON.to_json
     end
 
-    browser = Ferrum::Browser.new
+    browser = Ferrum::Browser.new(
+        :browser_path => "/app/.apt/usr/bin/google-chrome"
+    )
     browser.go_to("https://#{request.host}/render_graph")
     browser.screenshot(path: "Components/Graph/result.png")
 
