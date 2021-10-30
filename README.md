@@ -1,7 +1,6 @@
 # Version 1.3
 
-## Setup ENV
-In file config.ru file all <put> and <host> empty spaces, change SLACK_REDIRECT_URI with address from ngrock. 
-## Start bot
-* ./ngrok http 9292
-* rackup
+# About how to use this repository you can read 3 short aricles : 
+* <a href='https://habr.com/ru/post/576150/'>Part 1</a>
+* <a href='https://habr.com/ru/post/578798/'>Part 2</a>
+* <a href='https://habr.com/ru/post/586488/'>Part 3</a>
