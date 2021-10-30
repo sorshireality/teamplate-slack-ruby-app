@@ -2,10 +2,10 @@ require 'pg'
 module Database
   def init
     @db = PG.connect(
-        host: 'localhost',
-        dbname: 'habr_one_love',
-        user: 'admin',
-        password: 'admin'
+        host: ENV['HU_POSTGRES_HOST'],
+        dbname: ENV['HU_POSTGRES_DBNAME'],
+        user: ENV['HU_USER_USER_ENV'],
+        password: ENV['HU_POSTGRES_PASS']
     )
   end
 
