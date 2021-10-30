@@ -1,0 +1,174 @@
+html,
+body {
+    font-family: Consolas, monaco, monospace;
+}
+
+#chart {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    height: 500px;
+}
+
+.charttitle {
+    text-align: center;
+}
+
+.bars td {
+    vertical-align: bottom;
+    width: 8%;
+}
+
+.legend {
+    vertical-align: bottom;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.legbox {
+    display: block;
+    clear: both;
+}
+
+.xaxisname {
+    margin: 5px;
+    color: #fff;
+    font-size: 77%;
+    padding: 5px;
+    float: left;
+}
+
+
+/*Flat UI colors*/
+
+.one {
+    background: #16A085;
+}
+
+.two {
+    background: #2ECC71;
+}
+
+.three {
+    background: #27AE60;
+}
+
+.four {
+    background: #3498DB;
+}
+
+.five {
+    background: #2980B9;
+}
+
+.six {
+    background: #9B59B6;
+}
+
+.seven {
+    background: #8E44AD;
+}
+
+.eight {
+    background: #34495E;
+}
+
+.nine {
+    background: #2C3E50;
+}
+
+.ten {
+    background: #22313f;
+}
+
+.eleven {
+    background: #F1C40F;
+}
+
+.twelve {
+    background: #F39C12;
+}
+
+.thirteen {
+    background: #E67E22;
+}
+
+.fourteen {
+    background: #D35400;
+}
+
+.fifteen {
+    background: #E74C3C;
+}
+
+.sixteen {
+    background: #C0392B;
+}
+
+.seventeen {
+    background: #ECF0F1;
+}
+
+.seventeen.clouds {
+    color: #BDC3C7;
+}
+
+.eighteen {
+    background: #BDC3C7;
+}
+
+.nineteen {
+    background: #95A5A6;
+}
+
+.twenty {
+    background: #7F8C8D;
+}
+
+.mediana{
+    text-align: center;
+}
+
+.mediana::before{
+    content: "";
+    display: block;
+    width: 160px;
+    height: 2px;
+    background: red;
+    left: 35%;
+    top: 6%;
+    position: absolute;
+}
+
+.mediana::after{
+    content: "";
+    display: block;
+    width: 160px;
+    height: 2px;
+    background: red;
+    right: 35%;
+    top: 6%;
+    position: absolute;
+}
+.very_good{
+    background: green;
+    opacity: 0.8;
+}
+.good{
+    background: #27AE60;
+    opacity: 0.8;
+}
+.average{
+    background: #F1C40F;
+    opacity: 0.8;
+}
+.worse{
+    background: #E67E22;
+    opacity: 0.8;
+}
+.bad{
+    background: #C0392B;
+    opacity: 0.8;
+}
