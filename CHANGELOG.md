@@ -12,4 +12,7 @@
 
 ## 1.3 ##
 
-* 
+* App migrated to Heroku !
+* Refactored Database module.
+* Replaced Env file by using Heroku config.
+* Reworked Graph-building script.
