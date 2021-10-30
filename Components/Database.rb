@@ -45,7 +45,7 @@ class Database
     true
   end
 
-  def create_access_table
+  def create_oauth_access_table
     db.exec "
     create table oauth_access(
     team_id varchar(150),
