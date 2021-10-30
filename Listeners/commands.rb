@@ -75,6 +75,7 @@ class API < Sinatra::Base
         :browser_path => "/app/.apt/usr/bin/google-chrome"
     )
     browser.go_to("https://#{request.host}/render_graph")
+
     graph_ts = Time.now.to_i
     browser.screenshot(path: "/app/#{graph_ts}_graph.png")
 
@@ -82,14 +83,12 @@ class API < Sinatra::Base
     access_token = db.find_access_token input['team_id']
     client = create_slack_client access_token
 
-    triger_id = input['trigger_id']
-
     host = request.host
     template = File.read './Components/View/graph.erb'
     view = ERB.new(template).result(binding)
 
     client.views_open(
-        trigger_id: triger_id,
+        trigger_id: input['trigger_id'],
         view: view
     )
 
