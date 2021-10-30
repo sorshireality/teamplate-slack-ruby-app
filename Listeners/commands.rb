@@ -25,8 +25,8 @@ class API < Sinatra::Base
 
   post '/menu' do
     get_input
-    Database.init
-    access_token = Database.find_access_token input['team_id']
+    db = Database.new
+    access_token = db.find_access_token input['team_id']
     client = create_slack_client access_token
 
     triger_id = input['trigger_id']
@@ -59,8 +59,8 @@ class API < Sinatra::Base
     send_file 'Components/Graph/data.json'
   end
 
-  get '/graph_image.png' do
-    send_file 'Components/Graph/result.png'
+  get %r{/graph_image/(?<ts>\w+)} do
+    send_file "/app/#{params[:ts]}_graph.png"
   end
 
   post '/graph' do
@@ -71,22 +71,24 @@ class API < Sinatra::Base
       file.write DATA_TO_JSON.to_json
     end
 
-    browser = Ferrum::Browser.new
+    browser = Ferrum::Browser.new(
+        :browser_path => "/app/.apt/usr/bin/google-chrome"
+    )
     browser.go_to("https://#{request.host}/render_graph")
-    browser.screenshot(path: "Components/Graph/result.png")
 
-    Database.init
-    access_token = Database.find_access_token input['team_id']
+    graph_ts = Time.now.to_i
+    browser.screenshot(path: "/app/#{graph_ts}_graph.png")
+
+    db = Database.new
+    access_token = db.find_access_token input['team_id']
     client = create_slack_client access_token
-
-    triger_id = input['trigger_id']
 
     host = request.host
     template = File.read './Components/View/graph.erb'
     view = ERB.new(template).result(binding)
 
     client.views_open(
-        trigger_id: triger_id,
+        trigger_id: input['trigger_id'],
         view: view
     )
 

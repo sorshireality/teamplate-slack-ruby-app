@@ -3,7 +3,6 @@ require 'slack-ruby-client'
 require './Listeners/commands'
 require './Listeners/events'
 require './Listeners/interactivity'
-require './env'
 require './Components/Database'
 require './Components/Helper'
 
@@ -61,9 +60,8 @@ class Auth < Sinatra::Base
   # OAuth Step 1: Show the "Add to Slack" button, which links to Slack's auth request page.
   # This page shows the user what our app would like to access and what bot user we'd like to create for their team.
   get '/begin_auth' do
-    Database.init
+    Database.new
     status 200
-    pp SLACK_CONFIG
     body add_to_slack_button
   end
 
@@ -92,8 +90,8 @@ class Auth < Sinatra::Base
           bot_access_token: response['access_token']
       }
       # Saving access data
-      Database.init
-      Database.save_access $teams[team_id], team_id
+      db = Database.new
+      db.save_access $teams[team_id], team_id
       # Be sure to let the user know that auth succeeded.
       status 200
       body "Yay! Auth succeeded! You're awesome!"

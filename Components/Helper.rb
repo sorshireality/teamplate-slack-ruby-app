@@ -1,7 +1,7 @@
 module Helper
   def displayUserInfo(team_id, user_id, channel_id)
-    Database.init
-    client = create_slack_client(Database.find_access_token team_id)
+    db = Database.new
+    client = create_slack_client(db.find_access_token team_id)
     message = client.users_profile_get(
         user: user_id
     ).to_s
