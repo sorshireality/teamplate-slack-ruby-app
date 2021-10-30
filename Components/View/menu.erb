@@ -1,0 +1,38 @@
+{
+  "type": "modal",
+  "title": {
+    "type": "plain_text",
+    "text": "Menu"
+  },
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "List of available functions"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Display information about this user"
+      },
+      "accessory": {
+        "type": "button",
+        "text": {
+          "type": "plain_text",
+          "text": "Display",
+          "emoji": true
+        },
+        "value": "display_user_info",
+        "action_id": "display_user_info"
+      }
+    }
+  ],
+  "private_metadata": "<%= metadata %>",
+  "callback_id": "menu"
+}
