@@ -25,8 +25,8 @@ class API < Sinatra::Base
 
   post '/menu' do
     get_input
-    Database.init
-    access_token = Database.find_access_token input['team_id']
+    db = Database.new
+    access_token = db.find_access_token input['team_id']
     client = create_slack_client access_token
 
     triger_id = input['trigger_id']
@@ -75,8 +75,8 @@ class API < Sinatra::Base
     browser.go_to("https://#{request.host}/render_graph")
     browser.screenshot(path: "Components/Graph/result.png")
 
-    Database.init
-    access_token = Database.find_access_token input['team_id']
+    db = Database.new
+    access_token = db.find_access_token input['team_id']
     client = create_slack_client access_token
 
     triger_id = input['trigger_id']
